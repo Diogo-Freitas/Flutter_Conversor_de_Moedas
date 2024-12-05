@@ -3,9 +3,10 @@ import '../widgets/build_text_field.dart';
 import '../controllers/converter_controller.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title, required this.response});
 
   final String title;
+  final Map? response;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -13,6 +14,23 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final ConverterController _controller = ConverterController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.response != null) {
+      _controller.updateRates(widget.response!);
+    }
+
+    _controller.setErrorCallback = _updateErrorText;
+  }
+
+  void _updateErrorText(String error) {
+    setState(() {
+      _controller.errorText = error;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +78,12 @@ class _MyHomePageState extends State<MyHomePage> {
               prefix: '€ ',
               controller: _controller.euroController,
               onChanged: _controller.euroChanged,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              _controller.errorText,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.red, fontSize: 25),
             ),
             const SizedBox(height: 16),
           ],

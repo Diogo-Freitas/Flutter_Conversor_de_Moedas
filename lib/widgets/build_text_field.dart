@@ -17,7 +17,7 @@ class BuildTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      keyboardType: TextInputType.number,
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
         labelText: label,
         labelStyle: const TextStyle(color: Colors.amber, fontSize: 25),
