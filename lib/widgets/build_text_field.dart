@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 
 class BuildTextField extends StatelessWidget {
-  const BuildTextField({super.key, required this.label, required this.prefix});
+  const BuildTextField(
+      {super.key,
+      required this.label,
+      required this.prefix,
+      required this.controller,
+      required this.onChanged});
 
   final String label;
   final String prefix;
+  final TextEditingController controller;
+  final ValueChanged<String> onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
         labelText: label,
@@ -31,6 +39,7 @@ class BuildTextField extends StatelessWidget {
         )),
       ),
       style: const TextStyle(color: Colors.amber, fontSize: 18),
+      onChanged: onChanged,
     );
   }
 }
