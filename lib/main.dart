@@ -90,7 +90,7 @@ class _MyAppState extends State<MyApp> {
 
 Future<Map> getResponse() async {
   var response = await http.get(
-      Uri.https('economia.awesomeapi.com.br', '/json/last/USD-BRL,EUR-BRL'));
+      Uri.https('economia.awesomeapi.com.br', '/json/last/USD-BRL,EUR-BRL,BTC-BRL'));
 
   return json.decode(response.body);
 }

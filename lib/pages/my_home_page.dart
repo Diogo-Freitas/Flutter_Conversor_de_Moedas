@@ -24,6 +24,11 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     _controller.setErrorCallback = _updateErrorText;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _controller.dolarController.text = '1.00';
+      _controller.dolarChanged('1.00');
+    });
   }
 
   void _updateErrorText(String error) {
@@ -78,6 +83,13 @@ class _MyHomePageState extends State<MyHomePage> {
               prefix: '€ ',
               controller: _controller.euroController,
               onChanged: _controller.euroChanged,
+            ),
+            const SizedBox(height: 16),
+            BuildTextField(
+              label: 'Bitcoin',
+              prefix: '₿ ',
+              controller: _controller.bitcoinController,
+              onChanged: _controller.bitcoinChanged,
             ),
             const SizedBox(height: 16),
             Text(
